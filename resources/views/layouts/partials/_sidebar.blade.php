@@ -56,6 +56,18 @@
                   <p>Brand</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('sizes.index') }}" class="nav-link">
+                <i class="far fa-circle"></i>
+                  <p>Size</p>
+                </a>
+              </li>              
+              <li class="nav-item">
+                <a href="{{ route('products.index') }}" class="nav-link">
+                <i class="far fa-circle"></i>
+                  <p>Products</p>
+                </a>
+              </li>                            
             </ul>
           </li>
           <li class="nav-item">

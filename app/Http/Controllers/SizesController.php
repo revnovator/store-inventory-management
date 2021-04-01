@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Models\Category;
+use App\Models\Size;
 
-class CategoriesController extends Controller
+class SizesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderby('created_at', 'DESC')->get();
-        return view('categories.index', compact('categories'));
+        $sizes = Size::orderby('created_at', 'DESC')->get();
+        return view('sizes.index', compact('sizes'));
     }
 
     /**
@@ -28,7 +27,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view('categories.create');
+        return view('sizes.create');
     }
 
     /**
@@ -41,14 +40,14 @@ class CategoriesController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:categories'
+            'size' => 'required|min:1|max:50|unique:sizes'
         ]);
 
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
+        $size = new Size();
+        $size->size = $request->size;
+        $size->save();
         
-        flash('Category created successfully')->success();
+        flash('Size created successfully')->success();
         return back();
     }
 
@@ -72,8 +71,8 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         //
-        $category = Category::findOrfail($id);
-        return view('categories.edit', compact('category'));
+        $size = Size::findOrfail($id);
+        return view('sizes.edit', compact('size'));
     }
 
     /**
@@ -87,16 +86,16 @@ class CategoriesController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:categories,name,' . $id
+            'size' => 'required|min:1|max:50|unique:sizes,size,' . $id
         ]);        
 
-        $category = Category::findOrFail($id);
+        $size = Size::findOrFail($id);
 
-        $category->name = $request->name;
-        $category->save();
+        $size->size = $request->size;
+        $size->save();
 
-        flash('Category updated successfully')->success();
-        return redirect()->route('categories.index');
+        flash('Size updated successfully')->success();
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -108,20 +107,10 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $size = Size::findOrFail($id);
+        $size->delete();
 
-        flash('Category updated successfully')->success();
-        return redirect()->route('categories.index');
-    }
-
-// HANDLE AJAX REQUEST
-    public function getCategoriesJson() {
-        $categories = Category::all();
-
-        return response()->json([
-            'success' => true,
-            'data' => $categories,
-        ], Response::HTTP_OK);
+        flash('Size updated successfully')->success();
+        return redirect()->route('sizes.index');
     }
 }

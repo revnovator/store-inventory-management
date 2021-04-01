@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Models\Category;
+use App\Models\Product;
 
-class CategoriesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::orderby('created_at', 'DESC')->get();
-        return view('categories.index', compact('categories'));
+        $products = Product::orderby('created_at', 'DESC')->get();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -28,7 +27,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view('categories.create');
+        return view('products.create');
     }
 
     /**
@@ -44,11 +43,11 @@ class CategoriesController extends Controller
             'name' => 'required|min:2|max:50|unique:categories'
         ]);
 
-        $category = new Category();
+        $category = new Product();
         $category->name = $request->name;
         $category->save();
         
-        flash('Category created successfully')->success();
+        flash('Product created successfully')->success();
         return back();
     }
 
@@ -72,8 +71,8 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         //
-        $category = Category::findOrfail($id);
-        return view('categories.edit', compact('category'));
+        $category = Product::findOrfail($id);
+        return view('products.edit', compact('category'));
     }
 
     /**
@@ -87,16 +86,16 @@ class CategoriesController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:categories,name,' . $id
+            'name' => 'required|min:2|max:50|unique:products,name,' . $id
         ]);        
 
-        $category = Category::findOrFail($id);
+        $category = Product::findOrFail($id);
 
         $category->name = $request->name;
         $category->save();
 
-        flash('Category updated successfully')->success();
-        return redirect()->route('categories.index');
+        flash('Product updated successfully')->success();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -108,20 +107,10 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
-        $category = Category::findOrFail($id);
+        $category = Product::findOrFail($id);
         $category->delete();
 
-        flash('Category updated successfully')->success();
-        return redirect()->route('categories.index');
-    }
-
-// HANDLE AJAX REQUEST
-    public function getCategoriesJson() {
-        $categories = Category::all();
-
-        return response()->json([
-            'success' => true,
-            'data' => $categories,
-        ], Response::HTTP_OK);
+        flash('Product updated successfully')->success();
+        return redirect()->route('products.index');
     }
 }

@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
     //Brand
     Route::resource('brands', BrandsController::class);
+    Route::get('/api/brands', [BrandsController::class, 'getBrandsJson']);
 
     //Size
     Route::resource('sizes', SizesController::class);

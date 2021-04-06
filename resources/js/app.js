@@ -8,6 +8,7 @@ Vue.component('example-component', require('./components/ExampleComponents').def
 
 //products
 Vue.component('add-products', require('./components/products/ProductAdd').default)
+Vue.component('edit-products', require('./components/products/ProductEdit').default)
 
 
 import store from './store'

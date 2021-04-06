@@ -32,7 +32,11 @@
                                 <thead>
                                 <tr>
                                     <td>#SL</td>
+                                    <td class="text-center">Image</td>
                                     <td>Name</td>
+                                    <td>Sku</td>                                    
+                                    <td>Category</td>
+                                    <td>Brand</td>                                                                        
                                     <td>Action</td>
                                 </tr>
                                 </thead>
@@ -41,8 +45,15 @@
                                     @foreach($products as $key => $product)
                                         <tr>
                                             <td>{{ ++$key}}</td>
+                                            <td class="text-center">
+                                                <img width="64px" src="{{ asset('storage/product_images/'. $product->image) }}"> 
+                                            </td>
                                             <td>{{ $product->name ?? '' }}</td>
+                                            <td>{{ $product->sku ?? '' }}</td> 
+                                            <td>{{ $product->category->name ?? '' }}</td>
+                                            <td>{{ $product->brand->name ?? '' }}</td>                                                                                                                                   
                                             <td> 
+                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-primary"> <i class="fa fa-desktop"> </i> Show</a>
                                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"> </i> Edit</a>
                                                 <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="category-delete-{{ $product->id }}">
                                                     <i class="fa fa-trash"> </i> Delete

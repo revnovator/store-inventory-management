@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Size;
 
 class SizesController extends Controller
@@ -113,4 +114,13 @@ class SizesController extends Controller
         flash('Size updated successfully')->success();
         return redirect()->route('sizes.index');
     }
+    // HANDLE AJAX REQUEST
+    public function getSizesJson() {
+        $sizes = Size::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $sizes,
+        ], Response::HTTP_OK);
+    }    
 }

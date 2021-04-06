@@ -15,3 +15,5 @@ export const GET_SIZES = 'GET_SIZES'
 export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 
 export const EDIT_PRODUCTS = 'EDIT_PRODUCTS'
+
+export const GET_PRODUCTS = 'GET_PRODUCTS'

@@ -17,6 +17,7 @@ use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\BrandsController;
 use \App\Http\Controllers\SizesController;
 use \App\Http\Controllers\ProductsController;
+use \App\Http\Controllers\StocksController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,5 +42,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/api/sizes', [SizesController::class, 'getSizesJson']);
 
     //Product
-    Route::resource('products', ProductsController::class);    
+    Route::resource('products', ProductsController::class);   
+    Route::get('/api/products', [ProductsController::class, 'getProductsJson']);
+    
+    //Stock
+    Route::get('/stocks', [StocksController::class, 'stock'])->name('stock');
 });

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\ProductSizeStock;
 
-use http\Client\Response;
 
 class ProductsController extends Controller
 {
@@ -243,4 +244,14 @@ class ProductsController extends Controller
         flash('Product updated successfully')->success();
         return redirect()->route('products.index');
     }
+
+    // HANDLE AJAX REQUEST
+    public function getProductsJson() {
+        $products = Product::with(['product_stocks.size'])->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $products,
+        ], Response::HTTP_OK);
+    }    
 }

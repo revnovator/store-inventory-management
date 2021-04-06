@@ -10,6 +10,9 @@ Vue.component('example-component', require('./components/ExampleComponents').def
 Vue.component('add-products', require('./components/products/ProductAdd').default)
 Vue.component('edit-products', require('./components/products/ProductEdit').default)
 
+//stocks
+Vue.component('stock-manage', require('./components/stocks/StockManage').default)
+
 
 import store from './store'
 const app = new Vue ({

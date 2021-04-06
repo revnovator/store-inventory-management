@@ -67,7 +67,13 @@
                 <i class="far fa-circle"></i>
                   <p>Products</p>
                 </a>
-              </li>                            
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('stock') }}" class="nav-link">
+                <i class="far fa-circle"></i>
+                  <p>Stocks</p>
+                </a>
+              </li>                                          
             </ul>
           </li>
           <li class="nav-item">

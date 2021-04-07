@@ -5,7 +5,7 @@
     <div class="col-sm-6">
         <div class="card card-primary card-outline">
             <div class="card-body">
-                <h5 class="card-title">Stock Manager</h5></br>
+                <h5 class="card-title">Return Product Manager</h5></br>
                     <div class="card-body">
                         <div class="form-group">
                             <label>Product<span class="text-danger">*</span></label>
@@ -15,17 +15,8 @@
                         <div class="form-group">
                             <label> Date <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" v-model="form.date">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Stock Type <span class="text-danger">*</span></label>
-                            <select v-model="form.stock_type" class="form-control">
-                                <option value="in"> IN </option>
-                                <option value="out"> OUT </option>    
-                            </select>
-                        </div>                        
+                        </div>             
                     </div>                
-                    <!-- /.card-body -->
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save"> </i> Submit</button>
@@ -71,7 +62,6 @@
             return {
                 form: {
                     date: '',
-                    stock_type: 'in',
                     product_id: 0,
                     items: [{
 
@@ -107,7 +97,7 @@
                 })
             },
             submitForm() {
-                store.dispatch(actions.SUBMIT_STOCK, this.form)
+                store.dispatch(actions.SUBMIT_RETURN_PRODUCT, this.form)
             }
         }
     }

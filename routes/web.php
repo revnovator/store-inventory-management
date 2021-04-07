@@ -18,17 +18,28 @@ use \App\Http\Controllers\BrandsController;
 use \App\Http\Controllers\SizesController;
 use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\StocksController;
+use \App\Http\Controllers\ReturnProductsController;
+use \App\Http\Controllers\UsersController;
+use \App\Http\Controllers\DashboardController;
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
+Route::get('/logout', [UsersController::class, 'logout'])->name('users.logout');
 
 Route::middleware(['auth:sanctum'])->group(function() {
+    //Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    //User
+    Route::resource('users', UsersController::class);
+
     //Category 
     Route::resource('categories', CategoriesController::class);
     Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
@@ -47,4 +58,11 @@ Route::middleware(['auth:sanctum'])->group(function() {
     
     //Stock
     Route::get('/stocks', [StocksController::class, 'stock'])->name('stock');
+    Route::post('/stocks', [StocksController::class, 'stockSubmit'])->name('stockSubmit');    
+    Route::get('/stocks/history', [StocksController::class, 'history'])->name('stockHistory');
+
+    //Return product
+    Route::get('/return-products', [ReturnProductsController::class, 'returnProduct'])->name('returnProduct');
+    Route::post('/return-products', [ReturnProductsController::class, 'returnProductSubmit'])->name('returnProductSubmit');    
+    Route::get('/return-products/history', [ReturnProductsController::class, 'history'])->name('returnProductHistory');    
 });
